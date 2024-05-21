@@ -4,7 +4,7 @@
   <header class="header">
     <div class="container">
       <div class="logo">
-        <img src="../assets/images/logo.png" alt="Logo">
+        <img src="./assets/images/logo.png" alt="Logo">
       </div>
       <nav class="menu">
         <ul class="menu-list">
@@ -24,7 +24,7 @@
 
   <section class="main-content">
     <div class="container">
-      <img src="../assets/images/line1.png" alt="Line" class="line1">
+      <img src="./assets/images/line1.png" alt="Line" class="line1">
       <div class="main-info">
         <h1 class="main-title">
           Магия вкуса в каждой крошке
@@ -39,13 +39,19 @@
         </div>
       </div>
 
-      <img src="../assets/images/cookie.png" alt="Cookie" class="main-image">
+      <img src="./assets/images/cookie.png" alt="Cookie" class="main-image" [ngStyle]="mainImageStyle">
     </div>
   </section>
   <section class="products" id="products" #products>
     <div class="container">
-      <img src="../assets/images/line2.png" alt="line" class="line2">
+      <img src="./assets/images/line2.png" alt="line" class="line2">
       <div class="common-title">Выберите печенье</div>
+      <div class="sugar-free">
+        <div>Все</div>
+        <input type="checkbox" id="switch" (change)="switchSugarFree($event)" />
+        <label for="switch"></label>
+        <div>Без сахара</div>
+      </div>
       <div class="products-items">
         <div class="products-item" *ngFor="let product of productsData">
           <div class="products-image">
@@ -80,17 +86,17 @@
           </div>
         </div>
         <div class="love-item love-item-image">
-          <img src="../assets/images/love.png" alt="Cookies image">
+          <img src="./assets/images/love.png" alt="Cookies image">
         </div>
       </div>
     </div>
   </section>
 
   <section class="order" id="order" #order>
-    <img src="../assets/images/line3.png" alt="line" class="line3">
+    <img src="./assets/images/line3.png" alt="line" class="line3">
     <div class="container">
       <div class="common-title">Закажите печенье</div>
-      <img src="../assets/images/breadcrumbs.png" alt="Breadcrums" class="order-bg-image">
+      <img src="./assets/images/breadcrumbs.png" alt="Breadcrums" class="order-bg-image">
       <div class="order-block">
         <div class="order-form">
           <div class="order-form-text">
@@ -99,22 +105,31 @@
             мир сладких наслаждений.
           </div>
           <div class="order-form-inputs" [formGroup]="form">
-            <input type="text" placeholder="Выберите печенье" id="product" formControlName="product" [class]="{'error': form.get('product')?.invalid && (form.get('product')?.dirty || form.get('product')?.touched)}" readonly>
-            <input type="text" placeholder="Выше имя" id="name" formControlName="name" [class]="{'error': form.get('name')?.invalid && (form.get('name')?.dirty || form.get('name')?.touched)}">
-            <input type="text" placeholder="Ваш телефон" id="phone"formControlName="phone" [class]="{'error': form.get('phone')?.invalid && (form.get('phone')?.dirty || form.get('phone')?.touched)}">
-            <button class="button violet-button" id="order-action" (click)="confirmOrder( )" [disabled]="!form.valid">Оформить заказ</button>
+            <input type="text" placeholder="Выберите печенье" id="product" formControlName="product"
+              [class]="{'error': form.get('product')?.invalid && (form.get('product')?.dirty || form.get('product')?.touched)}"
+              readonly>
+            <input type="text" placeholder="Выше имя" id="name" formControlName="name"
+              [class]="{'error': form.get('name')?.invalid && (form.get('name')?.dirty || form.get('name')?.touched)}">
+            <input type="text" placeholder="Ваш телефон" id="phone" formControlName="phone"
+              [class]="{'error': form.get('phone')?.invalid && (form.get('phone')?.dirty || form.get('phone')?.touched)}">
+            <button class="button violet-button" id="order-action" (click)="confirmOrder( )"
+              [disabled]="!form.valid">Оформить заказ</button>
           </div>
         </div>
         <div class="order-block-image">
-          <img src="../assets/images/order.png" alt="Cookies" class="order-image">
+          <img src="./assets/images/order.png" alt="Cookies" class="order-image" [ngStyle]="orderImageStyle">
         </div>
       </div>
     </div>
   </section>
   <footer class="footer">
     <div class="logo">
-      <img src="../assets/images/logo.png" alt="Logo">
+      <img src="./assets/images/logo.png" alt="Logo">
       <div class="rights">«Все права защищены»</div>
     </div>
   </footer>
 </main>
+
+<div class="loader" [class]="{'showed': loaderShowed}" *ngIf="loader">
+  <lottie-player src="./assets/cookie.json" background="transparent" speed="1.5" autoplay></lottie-player>
+</div>
